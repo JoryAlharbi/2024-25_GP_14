@@ -1,84 +1,95 @@
+// ignore_for_file: depend_on_referenced_packages
+
+import 'dart:math';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:rawae/codia_page';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
+
+  if (Platform.isMacOS) {
+    const winSize = Size(359, 800);
+    appWindow.size = winSize;
+    appWindow.show();
+    doWhenWindowReady(() {
+      final win = appWindow;
+      win.size = winSize;
+      win.alignment = Alignment.center;
+      win.show();
+    });
+  }
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
+    var paqe = Platform.isMacOS ? const MacOSPage() : SingleChildScrollView(child: CodiaPage());
     return MaterialApp(
-      home: WelcomeScreen(),
-      debugShowCheckedModeBanner: false, // To hide the debug banner
+      title: 'CodiaDemoFlutter',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+      ),
+      home: paqe,
     );
   }
 }
 
-class WelcomeScreen extends StatelessWidget {
+class MacOSPage extends StatefulWidget {
+  const MacOSPage({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _MacOSPage();
+}
+
+class _MacOSPage extends State<MacOSPage> {
+  final ScrollController _horizontalScrollController = ScrollController();
+  final ScrollController _verticalScrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF1E1E1E), // Dark background
-              Color(0xFF3A3A3A), // Slight gradient effect
-            ],
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Welcome To Rawae',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 30), // Space between text and button
-              Container(
-                width: 200,
-                height: 60,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFFFBAB66), Color(0xFFF7418C)], // Gradient colors
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Navigation to next screen
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30), // Rounded corners
-                    ),
-                    backgroundColor: Colors.transparent, // Makes button itself transparent
-                    shadowColor: Colors.transparent, // Removes shadow
-                  ),
-                  child: Text(
-                    'Start',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+    return Builder(builder: (BuildContext context) {
+      MediaQueryData mediaQueryData = MediaQuery.of(context);
+      Size codiaPageSize = const Size(359, 800);
+      Size windowSize = mediaQueryData.size;
+      double widthScale = windowSize.width / codiaPageSize.width;
+      double heightScale = windowSize.height / codiaPageSize.height;
+      double scale = [1.0, widthScale, heightScale].reduce(max);
+
+      return Scrollbar(
+        controller: _verticalScrollController,
+        thumbVisibility: true,
+        notificationPredicate: (ScrollNotification notification) => notification.depth == 1,
+        child: Scrollbar(
+          controller: _horizontalScrollController,
+          thumbVisibility: true,
+          child: Transform.scale(
+            scale: scale,
+            alignment: Alignment.topLeft,
+            child: OverflowBox(
+              alignment: Alignment.topLeft,
+              child: SingleChildScrollView(
+                controller: _horizontalScrollController,
+                scrollDirection: Axis.horizontal,
+                child: SizedBox(
+                  width: codiaPageSize.width,
+                  height: codiaPageSize.height,
+                  child: SingleChildScrollView(
+                    controller: _verticalScrollController,
+                    scrollDirection: Axis.vertical,
+                    child: CodiaPage(),
                   ),
                 ),
               ),
-            ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
