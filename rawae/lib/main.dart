@@ -36,7 +36,7 @@ class WelcomeScreen extends StatelessWidget {
                 // You can add navigation to another screen (e.g., login) here
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.orange, // Button color
+                backgroundBuilder: Colors.orange, // Button color
                 padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               ),
               child: Text(
