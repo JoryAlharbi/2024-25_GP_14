@@ -1,1 +1,0 @@
-{"firestore":{"rules":"firestore.rules","indexes":"firestore.indexes.json"},"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"rawae-1860f","configurations":{"android":"1:551192338228:android:29b94486d6159a73840f61","ios":"1:551192338228:ios:6e3ab30df4bda9cc840f61","web":"1:551192338228:web:710b5dfd110f596c840f61"}}}}}}

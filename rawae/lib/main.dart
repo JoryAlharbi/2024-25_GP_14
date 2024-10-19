@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:/firebase_core/firebase_core.dart' ;
+import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart'; // Adjust the path if necessary
+  // bitsdojo_window: ^0.1.2 
+  // flutterflow_ui: ^0.3.1
+import 'package:google_fonts/google_fonts.dart';
+
+import 'login_page.dart';
+import 'signup_page.dart'; 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,56 +16,157 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: WelcomeScreen(),
+    return MaterialApp(
+      home: WelcomePage(),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/signup': (context) => SignUpPage(),
+      },
     );
   }
 }
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
-
+class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1E1E1E),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Welcome To Rawae',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // You can add navigation to another screen (e.g., login) here
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange, // Button color
-                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-              ),
-              child: const Text(
-                'Start',
-                style: TextStyle(
-                  fontSize: 18,
+      backgroundColor: Color(0xFF1B2835),
+      body: Stack(
+        children: [
+          // Ellipse 1 (Top-left)
+          Positioned(
+            top: -130,
+            left: -174,
+            child: Container(
+              width: 397, // Width matching the Figma design
+              height: 397, // Height matching the Figma design
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  colors: [
+                    Color(0xFFD35400).withOpacity(0.26), // Orange with adjusted opacity
+                    Color(0xFFA2DED0).withOpacity(0.0), // Transparent mint
+                  ],
+                  stops: [0.0, 1.0], // Smooth transition
+                  radius: 0.3, // Control the spread
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+          
+          // Ellipse 2 (Center-right)
+          Positioned(
+            top: 61,
+            right: -160,
+            child: Container(
+              width: 397, // Width matching the Figma design
+              height: 397, // Height matching the Figma design
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  colors: [
+                    Color(0xFF344C64).withOpacity(0.58), // Dark blue with adjusted opacity
+                    Color(0xFFD35400).withOpacity(0.0), // Transparent orange
+                  ],
+                  stops: [0.0, 1.0],
+                  radius: 0.3,
+                ),
+              ),
+            ),
+          ),
+          
+          // Ellipse 3 (Bottom-center)
+          Positioned(
+            bottom: -160,
+            left: 100,
+            child: Container(
+              width: 397, // Width matching the Figma design
+              height: 397, // Height matching the Figma design
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  colors: [
+                    Color(0xFFA2DED0).withOpacity(0.2), // Light mint with adjusted opacity
+                    Color(0xFFD35400).withOpacity(0.0), // Transparent orange
+                  ],
+                  stops: [0.0, 1],
+                  radius: 0.3,
+                ),
+              ),
+            ),
+          ),
+
+          // Main content positioned in the lower half
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: FractionallySizedBox(
+              widthFactor: 0.8, // Adjust width as needed
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 80.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Welcome To',
+                      style: GoogleFonts.poppins(
+                        fontSize: 37,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Rawae',
+                      style: GoogleFonts.poppins(
+                        fontSize: 37,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 27),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/login');
+                      },
+                      child: Container(
+                        width: 318,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xFF344C64),
+                              Color(0xFFD35400),
+                              Color(0xFFA2DED0),
+                            ],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Start',
+                            style: GoogleFonts.poppins(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
