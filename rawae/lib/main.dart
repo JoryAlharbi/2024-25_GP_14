@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+<<<<<<< Updated upstream
 import 'package:google_fonts/google_fonts.dart';
 import 'package:your_project_name/login_page.dart'; // Replace with your actual project name
 
@@ -84,14 +85,118 @@ class WelcomePage extends StatelessWidget {
                             ),
                           ),
                         ),
+=======
+import 'package:grouped_list/grouped_list.dart';
+
+class CodiaPage extends StatefulWidget {
+  CodiaPage({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _CodiaPage();
+}
+
+class _CodiaPage extends State<CodiaPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Container(
+        width: 412,
+        height: 917,
+        decoration: BoxDecoration(
+          color: const Color(0xff1b2735),
+          borderRadius: BorderRadius.circular(26),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              left: -174,
+              width: 794,
+              top: -160,
+              height: 1275,
+              child: Image.asset('images/image_941381.png', width: 794, height: 1275,),
+            ),
+            Positioned(
+              left: 46,
+              width: 318,
+              top: 595,
+              height: 67,
+              child: Container(
+                width: 318,
+                height: 67,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(2),
+                ),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      left: 0,
+                      width: 318,
+                      top: 0,
+                      height: 67,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: 1,
+                            width: 314,
+                            top: 10,
+                            height: 50,
+                            child: Container(
+                              width: 314,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            left: 133,
+                            top: 21,
+                            child: Text(
+                              'Start',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(decoration: TextDecoration.none, fontSize: 17.918, color: const Color(0xffffffff), fontFamily: 'Poppins-Medium', fontWeight: FontWeight.normal),
+                              maxLines: 9999,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+>>>>>>> Stashed changes
                       ),
                     ),
                   ],
                 ),
               ),
             ),
+<<<<<<< Updated upstream
           ),
         ],
+=======
+            Positioned(
+              left: 46,
+              width: 320,
+              top: 442,
+              height: 120,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 0,
+                    width: 321,
+                    top: 0,
+                    child: Text(
+                      'Welcome To \nRawae',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(decoration: TextDecoration.none, fontSize: 40.329, color: const Color(0xffffffff), fontFamily: 'Poppins-SemiBold', fontWeight: FontWeight.normal),
+                      maxLines: 9999,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+>>>>>>> Stashed changes
       ),
     );
   }

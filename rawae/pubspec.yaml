@@ -10,7 +10,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+<<<<<<< Updated upstream
   firebase_core: ^3.6.0  # Ensure this is the correct version
   cloud_firestore: ^5.4.4  # Ensure this is the correct version
   firebase_auth: ^5.3.1  # Ensure this is the correct version
   google_fonts: ^6.2.1
+=======
+  bitsdojo_window: ^0.1.6
+  grouped_list: ^6.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+>>>>>>> Stashed changes
