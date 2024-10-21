@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Firebase Auth
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -9,6 +10,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   bool _isObscured = true;
 
   @override
