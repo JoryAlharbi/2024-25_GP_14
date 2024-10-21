@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   bool _isObscured = true;
 
   @override
@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Welcome Back!',
+                      'Create Account',
                       style: GoogleFonts.poppins(
                         fontSize: 36,
                         fontWeight: FontWeight.w600,
@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      'Welcome back, we missed you.',
+                      'Create. Collaborate. Inspire',
                       style: GoogleFonts.poppins(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
@@ -89,6 +89,34 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           prefixIcon: const Icon(Icons.person,
                               color: Color(0xFFA4A4A4)),
+                          contentPadding:
+                              const EdgeInsets.symmetric(vertical: 16.0),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    // Email Input
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(0, 0, 0, 0.25),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextField(
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          hintStyle: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: const Color(0xFFA4A4A4),
+                          ),
+                          prefixIcon:
+                              const Icon(Icons.email, color: Color(0xFFA4A4A4)),
                           contentPadding:
                               const EdgeInsets.symmetric(vertical: 16.0),
                           border: InputBorder.none,
@@ -138,10 +166,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 25),
-                    // Log in Button
+                    // Sign up Button
                     GestureDetector(
                       onTap: () {
-                        // Add your login logic here
+                        // Add your sign-up logic here
                       },
                       child: Container(
                         width: double.infinity,
@@ -160,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         child: Center(
                           child: Text(
-                            'Log in',
+                            'Sign up',
                             style: GoogleFonts.poppins(
                               fontSize: 17,
                               fontWeight: FontWeight.w500,
@@ -171,12 +199,12 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    // Sign Up Section
+                    // Log In Section
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an account? ",
+                          "Already have an account? ",
                           style: GoogleFonts.poppins(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
@@ -185,11 +213,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(
-                                context, '/signup'); // Navigate to SignUpPage
+                            Navigator.pushNamed(context,
+                                '/login'); // Navigate back to LoginPage
                           },
                           child: Text(
-                            'Sign up',
+                            'log in',
                             style: GoogleFonts.poppins(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,

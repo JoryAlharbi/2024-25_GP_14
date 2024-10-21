@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'login_page.dart';
+import 'signup_page.dart';
+//import 'homepage.dart'; // Import the correct HomePage file
 import 'dart:math' as math;
 
 void main() {
@@ -13,7 +16,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: WelcomePage(),
       debugShowCheckedModeBanner: false,
-      routes: {},
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/signup': (context) => SignUpPage(),
+
+        //HomePage(), // Ensure this matches the home page file
+      },
     );
   }
 }
