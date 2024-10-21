@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart'; // Import this
 import 'package:google_fonts/google_fonts.dart';
 // Import the generated file
 
@@ -7,8 +8,10 @@ import 'signup_page.dart';
 //import 'homepage.dart'; // Import the correct HomePage file
 import 'dart:math' as math;
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
