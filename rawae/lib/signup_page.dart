@@ -85,7 +85,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontWeight: FontWeight.w400,
                             color: Color(0xFFA4A4A4),
                           ),
-                          prefixIcon: Icon(Icons.person, color: Color(0xFFA4A4A4)),
+                          prefixIcon:
+                              Icon(Icons.person, color: Color(0xFFA4A4A4)),
                           contentPadding: EdgeInsets.symmetric(vertical: 16.0),
                           border: InputBorder.none,
                         ),
@@ -111,7 +112,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontWeight: FontWeight.w400,
                             color: Color(0xFFA4A4A4),
                           ),
-                          prefixIcon: Icon(Icons.email, color: Color(0xFFA4A4A4)),
+                          prefixIcon:
+                              Icon(Icons.email, color: Color(0xFFA4A4A4)),
                           contentPadding: EdgeInsets.symmetric(vertical: 16.0),
                           border: InputBorder.none,
                         ),
@@ -141,7 +143,9 @@ class _SignUpPageState extends State<SignUpPage> {
                           prefixIcon: Icon(Icons.key, color: Color(0xFFA4A4A4)),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _isObscured ? Icons.visibility_off : Icons.visibility,
+                              _isObscured
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                               color: Color(0xFFA4A4A4),
                             ),
                             onPressed: () {
@@ -203,7 +207,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, '/login'); // Navigate back to LoginPage
+                            Navigator.pushNamed(context,
+                                '/login'); // Navigate back to LoginPage
                           },
                           child: Text(
                             'log in',
