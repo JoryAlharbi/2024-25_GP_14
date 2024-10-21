@@ -9,6 +9,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  grouped_list: ^4.0.0 # Use the latest version from pub.dev
+
+  #firebase libraries, since we are using firebase 
+  firebase_core: ^3.6.0   # Initialize Firebase
+  firebase_auth: ^5.3.1   # Firebase authentication
+  cloud_firestore: ^5.4.4 # Firestore for database storage
+
+
+#this is for uploading files to firebase , نحتاج هذا بعدين لما اليورز يختار الكوفر للستوري
+  firebase_storage: ^12.3.3
+
+  google_fonts: ^6.2.1
+  delightful_toast: ^1.1.0
+  get_it: ^8.0.0
+
+
+  #bitsdojo_window: ^0.1.6
+ # codia_demo_flutter: ^0.1.0  # Replace with the actual version
 
 dev_dependencies:
   flutter_test:
