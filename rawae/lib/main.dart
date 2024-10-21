@@ -7,18 +7,20 @@ import 'signup_page.dart';
 import 'dart:math' as math;
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: WelcomePage(),
+      home: const WelcomePage(),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/login': (context) => LoginPage(),
-        '/signup': (context) => SignUpPage(),
+        '/login': (context) => const LoginPage(),
+        '/signup': (context) => const SignUpPage(),
 
         //HomePage(), // Ensure this matches the home page file
       },
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
 }
 
 class WelcomePage extends StatefulWidget {
+  const WelcomePage({super.key});
+
   @override
   _WelcomePageState createState() => _WelcomePageState();
 }
@@ -53,7 +57,7 @@ class _WelcomePageState extends State<WelcomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1B2835),
+      backgroundColor: const Color(0xFF1B2835),
       body: Stack(
         children: [
           // Ellipse 1 (Top-left) with circular movement
@@ -78,11 +82,12 @@ class _WelcomePageState extends State<WelcomePage>
               decoration: BoxDecoration(
                 gradient: RadialGradient(
                   colors: [
-                    Color(0xFFD35400)
+                    const Color(0xFFD35400)
                         .withOpacity(0.26), // Orange with adjusted opacity
-                    Color(0xFFA2DED0).withOpacity(0.0), // Transparent mint
+                    const Color(0xFFA2DED0)
+                        .withOpacity(0.0), // Transparent mint
                   ],
-                  stops: [0.0, 1.0], // Smooth transition
+                  stops: const [0.0, 1.0], // Smooth transition
                   radius: 0.3, // Control the spread
                 ),
               ),
@@ -111,11 +116,12 @@ class _WelcomePageState extends State<WelcomePage>
               decoration: BoxDecoration(
                 gradient: RadialGradient(
                   colors: [
-                    Color(0xFF344C64)
+                    const Color(0xFF344C64)
                         .withOpacity(0.58), // Dark blue with adjusted opacity
-                    Color(0xFFD35400).withOpacity(0.0), // Transparent orange
+                    const Color(0xFFD35400)
+                        .withOpacity(0.0), // Transparent orange
                   ],
-                  stops: [0.0, 1.0],
+                  stops: const [0.0, 1.0],
                   radius: 0.3,
                 ),
               ),
@@ -173,7 +179,7 @@ class _WelcomePageState extends State<WelcomePage>
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'Rawae',
                       style: GoogleFonts.poppins(
@@ -182,7 +188,7 @@ class _WelcomePageState extends State<WelcomePage>
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 27),
+                    const SizedBox(height: 27),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, '/login');
@@ -191,7 +197,7 @@ class _WelcomePageState extends State<WelcomePage>
                         width: 318,
                         height: 50,
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
                               Color(0xFF344C64),
                               Color(0xFFD35400),
