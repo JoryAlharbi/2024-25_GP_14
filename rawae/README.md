@@ -1,3 +1,3 @@
 # rawae
 
-A new Flutter project.
+Rawae Flutter project
