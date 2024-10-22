@@ -9,8 +9,16 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
+//here is where we handle the signup creating the signUpState function
+// this function is async is usually used for time consuming task, for effiencay and it returns a Future
+//A Future is a special type of object in Dart that represents the result of an asynchronous operation.
+//When a Future is created, it's in a pending state. Once the operation completes, the Future is resolved
+//with a value or an error.
+
 class _SignUpPageState extends State<SignUpPage> {
   FirebaseAuth auth = FirebaseAuth.instance;
+
+  void signUpAction() async {}
 
   bool _isObscured = true;
 
