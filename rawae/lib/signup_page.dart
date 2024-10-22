@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Firebase Auth
+import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io'; // To handle image files
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
