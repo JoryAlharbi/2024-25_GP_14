@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Firebase Auth
-import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart'; // Firebase Storage
+import 'package:cloud_firestore/cloud_firestore.dart'; // Firestore for saving user data
+import 'package:image_picker/image_picker.dart'; // Image picker for profile picture
 import 'dart:io'; // To handle image files
 
 class SignUpPage extends StatefulWidget {
@@ -12,18 +13,58 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-//here is where we handle the signup creating the signUpState function
-// this function is async is usually used for time consuming task, for effiencay and it returns a Future
-//A Future is a special type of object in Dart that represents the result of an asynchronous operation.
-//When a Future is created, it's in a pending state. Once the operation completes, the Future is resolved
-//with a value or an error.
-
 class _SignUpPageState extends State<SignUpPage> {
   FirebaseAuth auth = FirebaseAuth.instance;
-
-  void signUpAction() async {}
-
+  final ImagePicker _picker = ImagePicker(); // Image picker instance
+  XFile? _image; // Selected image
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   bool _isObscured = true;
+
+  // Function to pick an image
+  Future<void> _pickImage() async {
+    final XFile? selectedImage =
+        await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = selectedImage;
+    });
+  }
+
+  // Function to handle user sign-up and upload image
+  void signUpAction() async {
+    try {
+      // Sign up with Firebase Auth
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      User? user = userCredential.user;
+
+      if (user != null && _image != null) {
+        // Upload image to Firebase Storage
+        File imageFile = File(_image!.path);
+        String fileName = '${user.uid}/profile_picture.jpg';
+        Reference storageRef = FirebaseStorage.instance.ref().child(fileName);
+
+        await storageRef.putFile(imageFile);
+        String downloadURL = await storageRef.getDownloadURL();
+
+        // Save user info to Firestore
+        FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'username': _usernameController.text.trim(),
+          'email': _emailController.text.trim(),
+          'profilePicture': downloadURL,
+        });
+
+        // Navigate to another screen or show success message
+        print('User signed up and image uploaded!');
+      }
+    } catch (e) {
+      print('Error during sign-up: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +123,22 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     const SizedBox(height: 25),
+                    // Profile picture picker
+                    GestureDetector(
+                      onTap: _pickImage,
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Colors.grey[300],
+                        backgroundImage: _image != null
+                            ? FileImage(File(_image!.path))
+                            : null,
+                        child: _image == null
+                            ? Icon(Icons.camera_alt,
+                                color: Colors.white, size: 40)
+                            : null,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                     // Username Input
                     Container(
                       decoration: BoxDecoration(
@@ -89,6 +146,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: TextField(
+                        controller: _usernameController,
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -117,6 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: TextField(
+                        controller: _emailController,
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -145,6 +204,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: TextField(
+                        controller: _passwordController,
                         obscureText: _isObscured,
                         style: GoogleFonts.poppins(
                           fontSize: 14,
@@ -182,9 +242,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     const SizedBox(height: 25),
                     // Sign up Button
                     GestureDetector(
-                      onTap: () {
-                        // Add your sign-up logic here
-                      },
+                      onTap: signUpAction, // Call sign-up action here
                       child: Container(
                         width: double.infinity,
                         height: 50,
@@ -202,9 +260,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         child: Center(
                           child: Text(
-                            'Sign up',
+                            'Sign Up',
                             style: GoogleFonts.poppins(
-                              fontSize: 17,
+                              fontSize: 18,
                               fontWeight: FontWeight.w500,
                               color: Colors.white,
                             ),
@@ -212,35 +270,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    // Log In Section
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already have an account? ",
-                          style: GoogleFonts.poppins(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xFFB6B6B6),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context,
-                                '/login'); // Navigate back to LoginPage
-                          },
-                          child: Text(
-                            'log in',
-                            style: GoogleFonts.poppins(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xFFD35400),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),

@@ -18,6 +18,8 @@ dependencies:
   cloud_firestore: ^4.0.0
   firebase_analytics: ^10.0.0
   firebase_messaging: ^14.0.0
+  firebase_storage: ^11.0.16  # Ensure this is the latest version
+
 
 
   image_picker: ^1.1.2 #so the user can add a profile picture in their profile 
