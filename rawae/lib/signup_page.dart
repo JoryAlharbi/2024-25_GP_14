@@ -133,7 +133,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             ? FileImage(File(_image!.path))
                             : null,
                         child: _image == null
-                            ? Icon(Icons.camera_alt,
+                            ? const Icon(Icons.camera_alt,
                                 color: Colors.white, size: 40)
                             : null,
                       ),
