@@ -20,7 +20,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.rawae"
+        applicationId = "com.Rawae.app"  // Update to match google-services.json
         minSdkVersion = 23
         targetSdkVersion = flutter.targetSdkVersion
         versionCode = flutter.versionCode
